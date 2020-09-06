@@ -19,10 +19,6 @@ public class Dash : MonoBehaviour
     {
         move = GetComponent<move>();//进行角色方向控制时就调用move中的函数
         contral = GetComponent<Charactercontral>();
-        if (contral != null)
-        {
-            print("hello");
-        }
     }
     void Start()
     {

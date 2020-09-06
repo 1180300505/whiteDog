@@ -14,6 +14,7 @@ public class Moves : MonoBehaviour
     {
         move = GetComponent<move>();//进行角色方向控制时就调用move中的函数
         contral = GetComponent<Charactercontral>();
+
     }
     void Start()
     {
@@ -68,5 +69,15 @@ public class Moves : MonoBehaviour
     public void moveleft()
     {
         left = true;
+    }
+
+    public bool isright()
+    {
+        return right;
+    }
+
+    public bool isleft()
+    {
+        return left;
     }
 }

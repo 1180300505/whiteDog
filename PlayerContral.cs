@@ -61,7 +61,7 @@ public class PlayerContral : Charactercontral
         bool A = Input.GetKey(KeyCode.A);
         bool D = Input.GetKey(KeyCode.D);
         bool Kup= Input.GetKeyUp(KeyCode.K);
-
+        
         if (GetStatenum() < 2)//检查能否回气
         {
             health.setrecoverqi(true);
@@ -83,7 +83,7 @@ public class PlayerContral : Charactercontral
 
         if (J)
         {
-            attack.doattack("hack",0.1700f);
+            attack.doattack("hack",0.1700f,0);
         }
 
         if (K)
@@ -113,10 +113,8 @@ public class PlayerContral : Charactercontral
         //动画的设置
         animator.SetBool("ground", move.isground());//设置着陆为move的着陆算法
         animator.SetFloat("speedy", move.rispeed().y);//让speedy成为刚体的纵向速度
-        
         animator.SetBool("up", Up);
         animator.SetBool("down", Down);
-
         animator.SetBool("dashing", dash.isdashing());
         
         if (GetStatenum() == 1)

@@ -46,7 +46,7 @@ public class shotscrips : MonoBehaviour
         //Vector3 vector = gameObject.transform.eulerAngles;
         
         Heathscrips health =  collision.gameObject.GetComponent<Heathscrips>();//获取碰撞对象的健康
-
+       // print(collision.gameObject.name);
         if (collision.gameObject.tag =="ground"&&!ishack)
         {
             if (damageelect != null)//如果有粒子效果
@@ -56,6 +56,8 @@ public class shotscrips : MonoBehaviour
 
         if (health != null && health.isenemay != isenemy)
         {
+            health.Damage(damage);
+            destroy(health.gameObject);
             Vector2 forcer = gameObject.transform.right*force;
             collision.gameObject.GetComponent<move>().AddSpeeds(forcer);//给予对象物理击退
             backer(forcer);//给予自身物理击退

@@ -103,26 +103,22 @@ public abstract class Charactercontral : MonoBehaviour
     public void doit(string a,bool cando,float cartoontime)//这个函数将会把将要进行的动作排列到动作列表中，列表最多有两个动作（可能会有修改）,这个函数只能响应tigger
     {//响应的字段，是否可以响应，动画的预计时间
         float time = cartoontime / 1 + (cartoontime % 1) / 0.60000f;//将60进制时间，转化为10进制时间
-        print(time);
         if (cando)
         {
             if(list.Count == 0)
             {
                 list.Add(new actions(time, a));
-                print("add0");
                 actiondo = true;
             }
             else if (list.Count == 1 &&cooldowntime<(cooldown/2))//如果动作列表中的动作小于等于一个且（当前动画播放时间小于一半，或小于0.5秒），将动作加入动作列表中
             {
                 list.Add(new actions(time, a));
-                print("add1");
             }
             else if (list.Count == 2 )//列表中如果排有两个动作，取消第二个，加入当前的
             {
                 list.RemoveAt(1);
                 list.Add(new actions(time, a));
                 actiondo = true;
-                print("add2");
             }
         }
     }

@@ -31,9 +31,6 @@ public class Heathscrips : MonoBehaviour
                     qi = qimax;
                 }
             }
-
-
-
         }
 
         else
@@ -50,19 +47,6 @@ public class Heathscrips : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        shotscrips shot = collision.gameObject.GetComponent<shotscrips>();
-        if(shot!= null)
-        {
-            if (shot.isenemy!=isenemay)
-            {
-                Damage(shot.damage);
-
-                shot.destroy(this.gameObject);
-            }
         }
     }
 
@@ -89,4 +73,5 @@ public class Heathscrips : MonoBehaviour
     {
         return qi >= a;
     }
+
 }

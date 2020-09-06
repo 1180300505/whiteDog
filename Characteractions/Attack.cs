@@ -7,15 +7,13 @@ public class Attack : MonoBehaviour
 
     protected weaponscript[] weapons;
     private Heathscrips health;
-    private Animator animator;
     private Charactercontral contral;
     // Start is called before the first frame update
-
+    public int consume;
     private void Awake()
     {
         weapons = GetComponentsInChildren<weaponscript>();//从子物体中获取武器
         health = GetComponent<Heathscrips>();
-        animator = GetComponent<Animator>();
         contral = GetComponent<Charactercontral>();
 
     }
@@ -30,13 +28,12 @@ public class Attack : MonoBehaviour
         
     }
 
-    public void doattack(string s,float time)//动作预设的时间，和预设的触发器，这个函数交给XXcontral来主动触发动作
+    public void doattack(string s,float time,int num)//动作预设的时间，和预设的触发器，这个函数交给XXcontral来主动触发动作
     {
         if (contral.GetStatenum() <= 2)
         {
-            print("doii");
             if (health.cando())
-                contral.doit(s, canAttack(0), time);
+                contral.doit(s, canAttack(num), time);
         }
     }
 
@@ -49,15 +46,13 @@ public class Attack : MonoBehaviour
             if (weapon != null)
             {
                 if (weapon.weaponnum == num)//调用那个指定的武器
-                    weapon.attack(false);
-                health.consumeqi(3);
-
+                    weapon.attack(false);          
             }
     }
 
 
 
-    public bool canAttack(int num)
+    private bool canAttack(int num)
     {
         foreach (weaponscript weapon in weapons)
             if (weapon != null)

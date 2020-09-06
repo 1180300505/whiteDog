@@ -8,6 +8,9 @@ public class move : MonoBehaviour
     private Vector2 direction = new Vector2(1, 1);
     private Vector2 movement;
     private Rigidbody2D ri;
+    private Transform ground;//目前踩着的地面
+    private CheckGround checkground;//检查当前的地面
+
 
     public bool automove = false;//是否自动移动(点了这个就没有moving什么事了)
     public bool moving = true;    //是否可以由ai控制移动
@@ -20,6 +23,7 @@ public class move : MonoBehaviour
     void Start()
     {
         ri = gameObject.GetComponent<Rigidbody2D>();
+        checkground = gameObject.GetComponentInChildren<CheckGround>();
     }
 
     // Update is called once per frame
@@ -159,42 +163,17 @@ public class move : MonoBehaviour
         speed.x = x;
         speed.y = y;
     }
-    private int groundCount = 0;
-    private int characterCount = 0;
-    void OnTriggerEnter2D(Collider2D collider)//判断是否落地
-    {
-        if (collider.gameObject.tag == "ground")
-        {
-            groundCount++;
-        }
-        if (collider.gameObject.tag == "character")
-        {
-            characterCount++;
-        }
 
+    public bool isground()
+    {
+        return checkground.isground();
     }
 
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "ground")
-        {
-            groundCount--;
-        }
-
-        if (collider.gameObject.tag == "character")
-        {
-            characterCount--;
-        }
-    }
-
-    public bool isground()//判断是否落地
-    {
-        return groundCount > 0;
-    }
     public bool isgroundcharater()//判断是否落在角色头上
     {
-        return characterCount > 0;
+        return checkground.isgroundcharater();
     }
+
     private Vector2 addedspeed=Vector2.zero;//添加速瞬时速度
 
     public void AddSpeed(Vector2 vector2)//按向量加速度
@@ -202,7 +181,7 @@ public class move : MonoBehaviour
         addedspeed = vector2;
     }
 
-    public void AddSpeeds(Vector2 vector2)//增加固定速度
+    public void AddSpeeds(Vector2 vector2)//增加固定速度  当当前的速度小于想要增加的速度的时候就把当前速度改为增加速度
     {
         Vector2 ris = ri.velocity;//记录当前刚体的速度
 
@@ -300,4 +279,10 @@ public class move : MonoBehaviour
         speed = transform.right*speed.x;
     }
 
+    public Transform theground()
+    {
+        return checkground.groundnow();
+    }
+    
+    
 }
